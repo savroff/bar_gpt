@@ -18,3 +18,20 @@ post "/create" do
   content_type :json
   { id: id }.to_json
 end
+
+get "/list" do
+  keys = REDIS.keys "id:*"
+  puts "Retrieved #{keys.length} keys"
+
+  content_type :json
+  keys.map { |key| key.split(":")[1] }.to_json
+end
+
+get "/:id" do
+  id = params["id"]
+  data = REDIS.get "id:#{id}"
+  puts "Retrieved #{id}"
+
+  content_type :json
+  data
+end
