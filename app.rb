@@ -5,7 +5,7 @@ require "json"
 
 REDIS = Redis.new
 
-post "/create" do
+post "/characters/create" do
   id = SecureRandom.uuid
   data = JSON.parse(request.body.read)
   puts data
@@ -19,7 +19,7 @@ post "/create" do
   { id: id }.to_json
 end
 
-get "/list" do
+get "/characters" do
   keys = REDIS.keys "id:*"
   puts "Retrieved #{keys.length} keys"
 
@@ -27,7 +27,7 @@ get "/list" do
   keys.map { |key| key.split(":")[1] }.to_json
 end
 
-get "/:id" do
+get "/characters/:id" do
   id = params["id"]
   data = REDIS.get "id:#{id}"
   puts "Retrieved #{id}"
