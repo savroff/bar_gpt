@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/create": {
+    "/characters": {
       "post": {
         "operationId": "create_character",
         "summary": "Create a new character",
