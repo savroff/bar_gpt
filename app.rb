@@ -24,7 +24,7 @@ get "/characters" do
   puts "Retrieved #{keys.length} keys"
 
   content_type :json
-  keys.map { |key| key.split(":")[1] }.to_json
+  keys.map { |key| JSON.parse(REDIS.get(key)).merge(id: key) }.to_json
 end
 
 get "/characters/:id" do
