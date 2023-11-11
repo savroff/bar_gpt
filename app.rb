@@ -5,7 +5,7 @@ require "json"
 
 REDIS = Redis.new
 
-post "/characters/create" do
+post "/characters" do
   id = SecureRandom.uuid
   data = JSON.parse(request.body.read)
   puts data
